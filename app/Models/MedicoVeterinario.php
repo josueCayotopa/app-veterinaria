@@ -8,4 +8,29 @@ use Illuminate\Database\Eloquent\Model;
 class MedicoVeterinario extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'po_document',
+        'dni',
+        'nombres',
+        'apellidos',
+        'celular',
+        'email',
+        'direccion',
+        'numero_de_colegiatura',
+        'especializacion',
+        'universidad',
+        'profesion',
+    ];
+
+    public function citas()
+    {
+        return $this->hasMany(Citas::class, 'medico_id');
+    }
+
+    public function horarios()
+    {
+        return $this->hasMany(Horarios::class, 'medico_id');
+
+    }
+
 }
