@@ -81,14 +81,17 @@ class EmpresaResource extends Resource
                 Tables\Columns\TextColumn::make('ruc')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('razon_social')
+                    ->limit(20)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('direccion_legal')
+                    ->limit(20)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('numero_celular')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('correo')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nombre_representante_legal')
+                    ->limit(20)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -103,7 +106,10 @@ class EmpresaResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -114,9 +120,7 @@ class EmpresaResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
