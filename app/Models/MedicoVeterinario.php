@@ -9,8 +9,8 @@ class MedicoVeterinario extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'po_document',
-        'dni',
+        'tipo_documento',
+        'numero_documento',
         'nombres',
         'apellidos',
         'celular',
@@ -20,6 +20,9 @@ class MedicoVeterinario extends Model
         'especializacion',
         'universidad',
         'profesion',
+        'telefono_emergencia',
+        'disponibilidad',
+        'tipo_contrato',
     ];
 
     public function citas()
