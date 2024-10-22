@@ -6,6 +6,8 @@ use App\Filament\Resources\ClienteResource\Pages;
 use App\Filament\Resources\ClienteResource\RelationManagers;
 use App\Models\Cliente;
 use Filament\Forms;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,29 +25,60 @@ class ClienteResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('tipo_documento')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('dni')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('nombres')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('apellidos')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('celular')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('direccion')
-                    ->maxLength(255)
-                    ->default(null),
-            ]);
+                Group::make()->schema(
+                    [
+                        //segmento 
+                        Section::make('Datos personales del cliente')->schema(
+                            [
+                                Forms\Components\Select::make('tipo_documento')
+                                    ->label('Tipo de Documento')
+                                    ->options([
+                                        
+                                    ]),
+                                Forms\Components\TextInput::make('dni')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\TextInput::make('nombres')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\TextInput::make('apellidos')
+                                    ->required()
+                                    ->maxLength(255),
+                            ]
+                        )->columns(2),
+                        Section::make('Direccion del cliente ')->schema(
+                            [
+                                Forms\Components\Textarea::make('direccion')
+                                    ->maxLength(255)
+                                    ->default(null),
+                            ]
+                        )
+
+                    ]
+                )->columnSpan(2),
+                Group::make()->schema(
+                    [
+                        //segmento 
+                        Section::make('Informacion de contacto')->schema(
+                            [
+                                Forms\Components\TextInput::make('celular')
+                                    ->maxLength(255)
+                                    ->default(null),
+                                Forms\Components\TextInput::make('email')
+                                    ->email()
+                                    ->required()
+                                    ->maxLength(255),
+                            ]
+                        )
+
+
+                    ]
+                )->columnSpan(1),
+
+
+
+
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
